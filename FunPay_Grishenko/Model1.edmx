@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="IdDeal" />
+          </Key>
+          <Property Name="IdDeal" Type="int" Nullable="false" />
+          <Property Name="IdPlayer_Sender" Type="int" Nullable="false" />
+          <Property Name="IdPlayer_Recipient" Type="int" Nullable="false" />
+          <Property Name="IdItem" Type="int" Nullable="false" />
+          <Property Name="DateOfCreation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GameAccoun">
+          <Key>
+            <PropertyRef Name="IdGameAccoun" />
+          </Key>
+          <Property Name="IdGameAccoun" Type="int" Nullable="false" />
+          <Property Name="GameTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdPlayer" Type="int" Nullable="false" />
+          <Property Name="GameCurrency" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IdItem" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="IdItem" />
+          </Key>
+          <Property Name="IdItem" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partnership">
+          <Key>
+            <PropertyRef Name="IdPartnership" />
+          </Key>
+          <Property Name="IdPartnership" Type="int" Nullable="false" />
+          <Property Name="IdPlayer_1" Type="int" Nullable="false" />
+          <Property Name="IdPlayer_2" Type="int" Nullable="false" />
+          <Property Name="StartDateOfCooperation" Type="date" Nullable="false" />
+          <Property Name="EndDateOfCooperation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="IdPlayer" />
+          </Key>
+          <Property Name="IdPlayer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="DateRegistracii" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Deal_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameAccoun_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="GameAccoun" Type="Self.GameAccoun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="GameAccoun">
+              <PropertyRef Name="IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameAccoun_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="GameAccoun" Type="Self.GameAccoun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="GameAccoun">
+              <PropertyRef Name="IdPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partnership_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Partnership" Type="Self.Partnership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="IdPartnership" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Deal" EntityType="Self.Deal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameAccoun" EntityType="Self.GameAccoun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partnership" EntityType="Self.Partnership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Deal_Items" Association="Self.FK_Deal_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameAccoun_Items" Association="Self.FK_GameAccoun_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="GameAccoun" EntitySet="GameAccoun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameAccoun_Player" Association="Self.FK_GameAccoun_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="GameAccoun" EntitySet="GameAccoun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partnership_Player" Association="Self.FK_Partnership_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Partnership" EntitySet="Partnership" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="IdDeal" />
+          </Key>
+          <Property Name="IdDeal" Type="Int32" Nullable="false" />
+          <Property Name="IdPlayer_Sender" Type="Int32" Nullable="false" />
+          <Property Name="IdPlayer_Recipient" Type="Int32" Nullable="false" />
+          <Property Name="IdItem" Type="Int32" Nullable="false" />
+          <Property Name="DateOfCreation" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_Deal_Items" FromRole="Deal" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="GameAccoun">
+          <Key>
+            <PropertyRef Name="IdGameAccoun" />
+          </Key>
+          <Property Name="IdGameAccoun" Type="Int32" Nullable="false" />
+          <Property Name="GameTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdPlayer" Type="Int32" Nullable="false" />
+          <Property Name="GameCurrency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IdItem" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_GameAccoun_Items" FromRole="GameAccoun" ToRole="Items" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_GameAccoun_Player" FromRole="GameAccoun" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="IdItem" />
+          </Key>
+          <Property Name="IdItem" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK_Deal_Items" FromRole="Items" ToRole="Deal" />
+          <NavigationProperty Name="GameAccoun" Relationship="Self.FK_GameAccoun_Items" FromRole="Items" ToRole="GameAccoun" />
+        </EntityType>
+        <EntityType Name="Partnership">
+          <Key>
+            <PropertyRef Name="IdPartnership" />
+          </Key>
+          <Property Name="IdPartnership" Type="Int32" Nullable="false" />
+          <Property Name="IdPlayer_1" Type="Int32" Nullable="false" />
+          <Property Name="IdPlayer_2" Type="Int32" Nullable="false" />
+          <Property Name="StartDateOfCooperation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDateOfCooperation" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_Partnership_Player" FromRole="Partnership" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="IdPlayer" />
+          </Key>
+          <Property Name="IdPlayer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="DateRegistracii" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="GameAccoun" Relationship="Self.FK_GameAccoun_Player" FromRole="Player" ToRole="GameAccoun" />
+          <NavigationProperty Name="Partnership" Relationship="Self.FK_Partnership_Player" FromRole="Player" ToRole="Partnership" />
+        </EntityType>
+        <Association Name="FK_Deal_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameAccoun_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="GameAccoun" Type="Self.GameAccoun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="GameAccoun">
+              <PropertyRef Name="IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameAccoun_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="GameAccoun" Type="Self.GameAccoun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="GameAccoun">
+              <PropertyRef Name="IdPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partnership_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Partnership" Type="Self.Partnership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="IdPartnership" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Deal" EntityType="Self.Deal" />
+          <EntitySet Name="GameAccoun" EntityType="Self.GameAccoun" />
+          <EntitySet Name="Items" EntityType="Self.Items" />
+          <EntitySet Name="Partnership" EntityType="Self.Partnership" />
+          <EntitySet Name="Player" EntityType="Self.Player" />
+          <AssociationSet Name="FK_Deal_Items" Association="Self.FK_Deal_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameAccoun_Items" Association="Self.FK_GameAccoun_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="GameAccoun" EntitySet="GameAccoun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameAccoun_Player" Association="Self.FK_GameAccoun_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="GameAccoun" EntitySet="GameAccoun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partnership_Player" Association="Self.FK_Partnership_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Partnership" EntitySet="Partnership" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="Deal">
+            <EntityTypeMapping TypeName="Model.Deal">
+              <MappingFragment StoreEntitySet="Deal">
+                <ScalarProperty Name="IdDeal" ColumnName="IdDeal" />
+                <ScalarProperty Name="IdPlayer_Sender" ColumnName="IdPlayer_Sender" />
+                <ScalarProperty Name="IdPlayer_Recipient" ColumnName="IdPlayer_Recipient" />
+                <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+                <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameAccoun">
+            <EntityTypeMapping TypeName="Model.GameAccoun">
+              <MappingFragment StoreEntitySet="GameAccoun">
+                <ScalarProperty Name="IdGameAccoun" ColumnName="IdGameAccoun" />
+                <ScalarProperty Name="GameTitle" ColumnName="GameTitle" />
+                <ScalarProperty Name="IdPlayer" ColumnName="IdPlayer" />
+                <ScalarProperty Name="GameCurrency" ColumnName="GameCurrency" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="Model.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partnership">
+            <EntityTypeMapping TypeName="Model.Partnership">
+              <MappingFragment StoreEntitySet="Partnership">
+                <ScalarProperty Name="IdPartnership" ColumnName="IdPartnership" />
+                <ScalarProperty Name="IdPlayer_1" ColumnName="IdPlayer_1" />
+                <ScalarProperty Name="IdPlayer_2" ColumnName="IdPlayer_2" />
+                <ScalarProperty Name="StartDateOfCooperation" ColumnName="StartDateOfCooperation" />
+                <ScalarProperty Name="EndDateOfCooperation" ColumnName="EndDateOfCooperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player">
+            <EntityTypeMapping TypeName="Model.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="IdPlayer" ColumnName="IdPlayer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="DateRegistracii" ColumnName="DateRegistracii" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

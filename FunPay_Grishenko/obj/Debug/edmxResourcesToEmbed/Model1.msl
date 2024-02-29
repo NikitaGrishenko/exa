@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="Deal">
+      <EntityTypeMapping TypeName="Model.Deal">
+        <MappingFragment StoreEntitySet="Deal">
+          <ScalarProperty Name="IdDeal" ColumnName="IdDeal" />
+          <ScalarProperty Name="IdPlayer_Sender" ColumnName="IdPlayer_Sender" />
+          <ScalarProperty Name="IdPlayer_Recipient" ColumnName="IdPlayer_Recipient" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+          <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameAccoun">
+      <EntityTypeMapping TypeName="Model.GameAccoun">
+        <MappingFragment StoreEntitySet="GameAccoun">
+          <ScalarProperty Name="IdGameAccoun" ColumnName="IdGameAccoun" />
+          <ScalarProperty Name="GameTitle" ColumnName="GameTitle" />
+          <ScalarProperty Name="IdPlayer" ColumnName="IdPlayer" />
+          <ScalarProperty Name="GameCurrency" ColumnName="GameCurrency" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="Model.Items">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partnership">
+      <EntityTypeMapping TypeName="Model.Partnership">
+        <MappingFragment StoreEntitySet="Partnership">
+          <ScalarProperty Name="IdPartnership" ColumnName="IdPartnership" />
+          <ScalarProperty Name="IdPlayer_1" ColumnName="IdPlayer_1" />
+          <ScalarProperty Name="IdPlayer_2" ColumnName="IdPlayer_2" />
+          <ScalarProperty Name="StartDateOfCooperation" ColumnName="StartDateOfCooperation" />
+          <ScalarProperty Name="EndDateOfCooperation" ColumnName="EndDateOfCooperation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Player">
+      <EntityTypeMapping TypeName="Model.Player">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="IdPlayer" ColumnName="IdPlayer" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="DateRegistracii" ColumnName="DateRegistracii" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,56 @@
+﻿<Page x:Class="FunPay_Grishenko.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FunPay_Grishenko"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page1">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="345*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="Sel" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Width="auto" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center" >
+
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                       
+                            <WrapPanel>
+                               
+                                <StackPanel Width="200">
+                                    <TextBlock Text="АйдиИгрока:" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="Имя:" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="Почта:" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="Рейтинг:" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="Дата Регистрации:" FontSize="20" FontWeight="Black"/>
+                                </StackPanel>
+                                <StackPanel Width="250">
+                                    <TextBlock Text="{Binding IdPlayer}" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="{Binding Name}"  FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="{Binding E_mail}" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="{Binding Rating}" FontSize="20" FontWeight="Black"/>
+                                    <TextBlock Text="{Binding DateRegistracii}" FontSize="20" FontWeight="Black"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    
+                                    <Button Content="Редактировать" Click="Button_Click"  FontSize="20" Background="Transparent" FontWeight="Bold" />
+                                </StackPanel>
+                            </WrapPanel>
+                        
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>
